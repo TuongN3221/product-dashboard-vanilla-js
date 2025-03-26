@@ -50,7 +50,7 @@ function handleError(error) {
 }
 
 // Task 4
-async function displayProducts() {
+async function displayProductCards() {
     const container = document.getElementById('product-container')
 
     try {
@@ -63,7 +63,7 @@ async function displayProducts() {
         //Clears previous content
         container.innerHTML= ''
         //Loops through the first 5 products
-        products.slice(0, 5).foreEach(product =>{
+        products.slice(0, 5).forEach(product =>{
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
 
@@ -72,7 +72,7 @@ async function displayProducts() {
             img.alt = product.fields.name;
 
             const name = document.createElement('h3')
-            name.src = product.fields.name;
+            name.textContent = product.fields.name;
 
             const price = document.createElement('p')
             price.textContent = `$${(product.fields.price / 100).toFixed(2)}`
