@@ -88,3 +88,6 @@ async function displayProducts() {
         handleError(error);
     }
 }
+function handleError(error){
+    console.log("AN ERROR OCCURED:" + error.message)
+}
