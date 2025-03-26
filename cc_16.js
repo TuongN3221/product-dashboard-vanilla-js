@@ -12,13 +12,14 @@ function fetchProductsThen() {
     .then(products => {
         products.forEach(product =>{
             const listItem = document.createElement('li')
-            listItem.textContent = `${product.title} = $${product.price}`
+            listItem.textContent = `${product.fields.name} - $${(product.fields.price / 100).toFixed(2)}`
             productList.appendChild(listItem)
         })
     })
     // Catches any errors that might occur in request
     .catch(error => {
-        console.error('There was a problem in the fetch operation:', error)
+        console.error('Fetch Error:', error)
+        productList.innerHTML = '<li style="color: red;"> Error Loading Products </li>'
     })
 }
 // Task 3
@@ -29,7 +30,7 @@ async function fetchProductsAsync() {
             throw new Error('Failed To Get Product Data')
         }
         const products = await response.json();
-        console.log('Product:', products);
+        displayProductCards(products);
     }
     catch(error){
         handleError(error)
@@ -91,6 +92,8 @@ async function displayProductCards() {
 // Task 5
 function handleError(error){
     console.log("AN ERROR OCCURED:" + error.message)
+    const container = document.getElementById('product-container');
+    container.innerHTML = '<p style="color: red;">Error loading products. Please try again.</p>'
 }
 
 // Task 6
