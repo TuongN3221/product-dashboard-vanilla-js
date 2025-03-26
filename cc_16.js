@@ -30,7 +30,6 @@ async function fetchProductsAsync() {
         }
         const products = await response.json();
         console.log('Product:', products);
-
     }
     catch(error){
         handleError(error)
@@ -48,4 +47,44 @@ function displayProducts(products){
 function handleError(error) {
     console.error(`Error In Fetching Products`, error.message);
     productList.innerHTML = '<li style="color: red;">Error loading products. Please try again later.</li>';
+}
+
+// Task 4
+async function displayProducts() {
+    const container = document.getElementById('product-container')
+
+    try {
+        const response = await fetch('https://www.course-api.com/javascript-store-products');
+        if (!response.ok){
+            throw new Error('Failed To Get Product Data')
+        }
+        const products = await response.json();
+
+        //Clears previous content
+        container.innerHTML= ''
+        //Loops through the first 5 products
+        products.slice(0, 5).foreEach(product =>{
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+
+            const img = document.createElement('img')
+            img.src = product.fields.image[0].url;
+            img.alt = product.fields.name;
+
+            const name = document.createElement('h3')
+            name.src = product.fields.name;
+
+            const price = document.createElement('p')
+            price.textContent = `$${(product.fields.price / 100).toFixed(2)}`
+            
+            //Appends all elements to card
+            productCard.appendChild(img)
+            productCard.appendChild(name)
+            productCard.appendChild(price)
+            // Append to container
+            container.appendChild(productCard)
+        })
+    }catch(error){
+        handleError(error);
+    }
 }
