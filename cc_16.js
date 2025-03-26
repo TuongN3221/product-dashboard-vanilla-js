@@ -88,6 +88,11 @@ async function displayProducts() {
         handleError(error);
     }
 }
+// Task 5
 function handleError(error){
     console.log("AN ERROR OCCURED:" + error.message)
 }
+
+// Task 6
+fetchProductsThen();
+fetchProductsAsync();
