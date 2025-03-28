@@ -9,13 +9,7 @@ function fetchProductsThen() {
         }
         return response.json();// Parses response as JSON
     })// Checks if the network response is optimal
-    .then(products => {
-        products.forEach(product =>{
-            const listItem = document.createElement('li')
-            listItem.textContent = `${product.fields.name} - $${(product.fields.price / 100).toFixed(2)}`
-            productList.appendChild(listItem)
-        })
-    })
+
     // Catches any errors that might occur in request
     .catch(error => {
         console.error('Fetch Error:', error)
